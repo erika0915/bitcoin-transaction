@@ -45,13 +45,12 @@ print("-" * 30)
 print("1. Private Key Object:", private_key_1)
 print("2. Public Key Object: ", public_key_1)
 
-# PEM 출력 (보고서의 '예상 출력'에 포함 가능)
+# PEM 출력
 print("\n--- 개인 키 (Private Key PEM) ---")
 print(private_pem_1)
 print("--- 공개 키 (Public Key PEM) ---")
 print(public_pem_1)
 print("-" * 60)
-
 
 # Key Pair 2 출력 (P2PKH 용)
 print("\n[ Key Pair 2 (P2PKH) ]")
@@ -59,7 +58,7 @@ print("-" * 30)
 print("1. Private Key Object:", private_key_2)
 print("2. Public Key Object: ", public_key_2)
 
-# PEM 출력 (보고서의 '예상 출력'에 포함 가능)
+# PEM 출력
 print("\n--- 개인 키 (Private Key PEM) ---")
 print(private_pem_2)
 print("--- 공개 키 (Public Key PEM) ---")

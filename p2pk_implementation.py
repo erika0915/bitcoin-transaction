@@ -10,11 +10,10 @@ def implement_p2pk(private_key, public_key, message):
     print("              🚀 Task 2: P2PK 구현 및 실행              ")
     print("=" * 60)
 
-    # Task 2 메시지: "Blockchain Application Q1" [cite: 10]
+    # Task 2 메시지: "Blockchain Application Q1" 
     message_bytes = message.encode('utf-8')
 
-    # ScriptSig 생성: 서명 (Signature)
-    # SHA-256 알고리즘 사용 [cite: 10]
+    # ScriptSig 서명 생성 : SHA-256 사용 
     try:
         signature = private_key.sign(
             message_bytes,
@@ -26,37 +25,33 @@ def implement_p2pk(private_key, public_key, message):
         print(f"❌ 서명 생성 오류: {e}")
         return False
 
-    # Public Key (bytes)를 DER 형식으로 추출 (스크립트 스택 사용을 위해)
+    # Public Key (bytes)를 DER 형식으로 추출
     public_key_bytes = public_key.public_bytes(
         encoding=serialization.Encoding.DER,
         format=serialization.PublicFormat.SubjectPublicKeyInfo
     )
 
-    # 스크립트 구성
-    # ScriptSig: [Signature] [Public Key] [cite: 9]
-    # ScriptPubKey: [Public Key] OP_CHECKSIG [cite: 9]
+    # 스크립트 구성: ScriptSig: [Signature] [Public Key], ScriptPubKey: [Public Key] OP_CHECKSIG
     print("✅ 2. ScriptSig 및 ScriptPubKey 구성 완료.")
 
 
     # 스크립트 실행 시뮬레이션
-    # ScriptSig (증거)와 ScriptPubKey (잠금)을 합쳐 실행합니다. 
-    print("\n[실행] 완전한 스크립트 구성 및 실행 시작...") # [cite: 11]
+    print("\n[실행] 완전한 스크립트 구성 및 실행 시작...")
     
-    # OP_CHECKSIG는 Python의 public_key.verify()를 통해 시뮬레이션됩니다.
     try:
-        # 검증: (Signature, Message)를 Public Key로 검증
+        # Public Key로 Signature와 Message를 검증
         public_key.verify(
             signature,
             message_bytes,
             hashes.SHA256()
         )
         
-        # 검증 성공 시 스택의 결과는 True (거래 성공)
+        # 검증 성공 시
         final_result = True
         print("✅ OP_CHECKSIG 결과: TRUE (거래 성공!)")
         
     except Exception as e:
-        # 검증 실패 시 결과는 False
+        # 검증 실패 시
         final_result = False
         print(f"❌ OP_CHECKSIG 결과: FALSE (거래 실패! 오류: {e})")
 
